@@ -1,0 +1,1 @@
+E:\Visual Studio 2022\.NET Core Projects\Ecommerce-Frontend\Ecommerce-Frontend\obj\Debug\Ecommerce-Frontend.esproj.CoreCompileInputs.cache
