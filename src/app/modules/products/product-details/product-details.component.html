@@ -1,0 +1,52 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+      <!-- Product Card -->
+      <div class="card shadow-lg">
+        <a [href]="baseUrl + product.imagePath" class="text-decoration-none">
+          <img [src]="baseUrl + product.imagePath"
+               class="card-img-top"
+               [alt]="product.name"
+               style="height: 200px; object-fit: contain; background: #f9f9f9;">
+        </a>
+        <div class="card-body">
+          <h5 class="card-title text-primary">🛒 Product #{{ product.id }}</h5>
+
+          <h2 class="mb-3">{{ product.name }}</h2>
+
+          <p class="card-text">
+            <strong>Description:</strong> {{ product.description }}
+          </p>
+
+          <p class="card-text">
+            <strong>Price:</strong>
+            <span class="text-success">{{ product.price | currency }}</span>
+          </p>
+
+          <p class="card-text">
+            <strong>Stock:</strong>
+            <span [ngClass]="{
+                  'text-success' : product.stock>
+              0,
+              'text-danger': product.stock === 0
+              }">
+              {{ product.stock > 0 ? product.stock + ' available' : 'Out of stock' }}
+            </span>
+          </p>
+
+          <p class="card-text">
+            <strong>Category Name:</strong>
+            <span class="text-success">{{ product.category.name }}</span>
+          </p>
+
+          <button class="btn btn-outline-primary w-100 mt-3" [disabled]="product.stock === 0"
+                  (click)="addToCart(product)">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

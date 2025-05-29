@@ -8,8 +8,16 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\Ecommerce-Frontend\browser\</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="src\app\shared\CreateDTOs\**" />
+    <None Remove="src\app\shared\NewFolder1\**" />
+    <None Remove="src\app\shared\NewFolder2\**" />
+    <TypeScriptConfiguration Remove="src\app\shared\CreateDTOs\**" />
+    <TypeScriptConfiguration Remove="src\app\shared\NewFolder1\**" />
+    <TypeScriptConfiguration Remove="src\app\shared\NewFolder2\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="src\app\core\guards\" />
-    <Folder Include="src\app\core\interceptors\" />
-    <Folder Include="src\app\core\services\" />
+    <Folder Include="src\app\core\services\cart\" />
+    <Folder Include="src\app\core\services\category\" />
   </ItemGroup>
 </Project>

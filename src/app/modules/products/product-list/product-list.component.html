@@ -1,0 +1,45 @@
+<div class="container mt-4">
+  <h2 class="mb-4">🛍️ Product List</h2>
+
+  <div class="row">
+
+    <div class="col-md-4 mb-4" *ngFor="let product of products">
+
+      <div class="card h-100 shadow-sm">
+        <a [routerLink]="['/products', product.id]" class="text-decoration-none">
+          <img [src]="baseUrl + product.imagePath"
+               class="card-img-top"
+               [alt]="product.name"
+               style="height: 200px; object-fit: contain; background: #f9f9f9;">
+        </a>
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">#{{ product.id }}</h6>
+          <p class="card-text">{{ product.description }}</p>
+        </div>
+        <div class="card-footer bg-transparent border-top-0">
+          <button class="btn btn-primary w-100" [disabled]="product.stock === 0" (click)="addToCart(product)">
+            Add to Cart
+          </button>
+        </div>
+
+        <div class="card-footer bg-transparent border-top-0">
+          <button class="btn btn-danger w-100" [disabled]="product.stock === 0" (click)="removeFromCart(product.id)">
+            Remove From Cart
+          </button>
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <div class="card-footer bg-transparent border-top-0">
+      <button class="btn btn-primary w-100" [routerLink]="['/cart']">
+        Cart Items
+      </button>
+    </div>
+
+  </div>
+</div>
+

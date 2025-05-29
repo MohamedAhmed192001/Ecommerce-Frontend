@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { envirnment } from '../../../../environments/environment';
 import { AuthService } from '../../../core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent {
   errorMessage = '';
   successMessage = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -28,14 +29,21 @@ export class LoginComponent {
       this.authService.login(this.loginForm.value).subscribe(
       {
         next: (response) => {
-          localStorage.setItem('token', response.token);
-          this.successMessage = "Login Successfull!"
-          console.log("Login Successfull!");
-          // Redirect user here if needed
+          if (response && response.token) {
+            localStorage.setItem('token', response.token);
+            this.successMessage = "Login Successful!";
+            console.log("Token saved:", response.token);
+
+            // ✅ Navigate to /products after token is saved
+            this.router.navigate(['/products']);
+          } else {
+            this.errorMessage = "No token received!";
+          }
         },
           error: (error) => {
-            this.errorMessage = "Invalid email or password!";
-            console.log(error);
+            localStorage.removeItem('token'); // Clean up any old token
+            this.errorMessage = "Invalid email or password.";
+            console.error(error);
           }
       })
 

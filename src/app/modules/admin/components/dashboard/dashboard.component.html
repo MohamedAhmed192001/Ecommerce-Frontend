@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- Sidebar -->
+    <div class="col-md-3 bg-dark text-white vh-100 p-3">
+      <h5>Admin Panel</h5>
+      <hr />
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a routerLink="products" class="nav-link text-white">Manage Products</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="orders" class="nav-link text-white">Manage Orders</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="users" class="nav-link text-white">Manage Users</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Content -->
+    <div class="col-md-9 p-4">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>

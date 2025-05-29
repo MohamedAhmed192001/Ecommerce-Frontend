@@ -3,11 +3,24 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes =
   [
-    { path: '', redirectTo: 'register', pathMatch: 'full' }, 
     {
       path: '',
       loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)
-    }
+    },
+    {
+      path: 'products',
+      loadChildren: () => import('./modules/products/products.module').then(m => m.ProductsModule)
+    },
+    {
+      path: 'cart',
+      loadChildren: () => import('./modules/cart/cart.module').then(m => m.CartModule)
+    },
+    {
+      path: 'admin',
+      loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule)
+    },
+    { path: '**', redirectTo: 'login' }
+    
   ];
 
 @NgModule({

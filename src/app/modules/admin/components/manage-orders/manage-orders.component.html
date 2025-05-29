@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  <h3 class="mb-4">📦 All Orders</h3>
+
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>User ID</th>
+        <th>User Name</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Order Date</th>
+        <th>Items</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.userId }}</td>
+        <td>{{ order.userName }}</td>
+        <td>{{ order.address }}</td>
+        <td>{{ order.phone }}</td>
+        <td>{{ order.orderDate }}</td>
+        <td>
+          <!-- Nested Table for Order Items -->
+          <table class="table table-sm table-striped mb-0 bg-light">
+            <thead class="table-light">
+              <tr>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of order.items">
+                <td>{{ item.productName }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price | currency }}</td>
+                <td>{{ item.price * item.quantity | currency }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
