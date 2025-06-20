@@ -9,6 +9,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddProductComponent } from './components/manage-products/add-product/add-product.component';
 import { ManageOrdersComponent } from './components/manage-orders/manage-orders.component';
 import { PlaceOrderComponent } from './components/manage-orders/place-order/place-order.component';
+import { ManageUsersComponent } from './components/manage-users/manage-users.component';
+import { AddUserComponent } from './components/manage-users/add-user/add-user.component';
+import { UpdateUserComponent } from './components/manage-users/update-user/update-user.component';
+import { ManageCategoriesComponent } from './components/manage-categories/manage-categories.component';
+import { AddAndEditCategoryComponent } from './components/manage-categories/add-and-edit-category/add-and-edit-category.component';
+
 
 
 @NgModule({
@@ -18,7 +24,12 @@ import { PlaceOrderComponent } from './components/manage-orders/place-order/plac
     EditProductComponent,
     AddProductComponent,
     ManageOrdersComponent,
-    PlaceOrderComponent
+    PlaceOrderComponent,
+    ManageUsersComponent,
+    AddUserComponent,
+    UpdateUserComponent,
+    ManageCategoriesComponent,
+    AddAndEditCategoryComponent
   ],
   imports: [
     CommonModule,

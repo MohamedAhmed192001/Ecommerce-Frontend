@@ -19,5 +19,9 @@
     <Folder Include="src\app\core\guards\" />
     <Folder Include="src\app\core\services\cart\" />
     <Folder Include="src\app\core\services\category\" />
+    <Folder Include="src\app\core\services\payment\" />
+    <Folder Include="src\app\modules\home\components\" />
+    <Folder Include="src\app\modules\orders\components\" />
+    <Folder Include="src\app\modules\payment\components\" />
   </ItemGroup>
 </Project>

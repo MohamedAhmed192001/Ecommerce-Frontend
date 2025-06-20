@@ -35,4 +35,15 @@ export class AuthService {
     localStorage.removeItem('token');
   }
 
+  getUserRole(): string | null{
+    var token = localStorage.getItem('token');
+
+    if (!token)
+      return null;
+
+    var payload = JSON.parse(atob(token.split('.')[1]));
+
+    return payload["role"] || payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
+  }
+
 }

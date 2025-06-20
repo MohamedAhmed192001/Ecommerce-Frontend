@@ -8,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
   currentYear: number = new Date().getFullYear();
+
+  isLoggedIn(): boolean {
+    const token = localStorage.getItem('token');
+    if (token)
+      return true
+    else
+      return false
+  }
 }

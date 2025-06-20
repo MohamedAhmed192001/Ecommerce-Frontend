@@ -37,4 +37,12 @@ export class ProductService {
     return this.http.delete(`${this.baseUrl}/` + productId);
   }
 
+  getFeaturedProducts(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/get-featured-products`);
+  }
+
+  getProductsByCategory(categoryId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/get-products-by-categoryId/` + categoryId);
+  }
+
 }

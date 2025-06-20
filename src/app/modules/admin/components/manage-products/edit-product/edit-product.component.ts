@@ -5,6 +5,7 @@ import { ProductService } from '../../../../../core/services/product.service';
 import { envirnment } from '../../../../../../environments/environment';
 import { Category } from '../../../../../shared/models/ResponseDTOs/category';
 import { CategoryService } from '../../../../../core/services/category/category.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-product',
@@ -20,7 +21,7 @@ export class EditProductComponent {
   selectedImageFile: File | null = null;
   categories: Category[] = [];
   constructor(private productService: ProductService, private categoryService: CategoryService,
-    private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
+    private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private toastr: ToastrService) {
 
     this.productForm = this.fb.group({
       name: ['', Validators.required],
@@ -46,7 +47,10 @@ export class EditProductComponent {
         console.log(product);
 
       },
-      error: err => { console.error('Error occureed when fetching product: ', err) }
+      error: err => {
+        this.toastr.error('Error occureed when fetching product');
+        console.error('Error occureed when fetching product: ', err)
+      }
     })
   }
 
@@ -56,7 +60,10 @@ export class EditProductComponent {
         this.categories = categories;
         console.log(categories);
       },
-      error: err => { console.error('Error occureed when fetching categories: ', err) }
+      error: err => {
+        this.toastr.error('Error occureed when fetching categories');
+        console.error('Error occureed when fetching categories: ', err)
+      }
     })
   }
 
@@ -80,16 +87,19 @@ export class EditProductComponent {
         formData.append('imageFile', this.selectedImageFile);
 
       this.productService.editProduct(this.productId, formData).subscribe({
-          next: success => {
-            alert('Product updated successfully!');
+        next: success => {
+          this.toastr.success('Product updated successfully!');
             this.router.navigate(['/admin/products']);
             console.log(success);
           },
-          error: err => { console.error('Error occureed when updating product: ', err) }
+        error: err => {
+          this.toastr.error('Error occureed when updating product');
+          console.error('Error occureed when updating product: ', err)
+        }
         })
       }
       else
-        alert('Product Form Invalid')
+      this.toastr.error('Product Form Invalid');
     }
 
   

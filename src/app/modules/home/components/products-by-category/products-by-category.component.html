@@ -1,0 +1,20 @@
+<div class="container mt-4">
+  <h3 class="mb-4">🗂️ Products in This Category</h3>
+
+  <div class="row">
+    <div class="col-md-3 mb-4" *ngFor="let product of products">
+      <div class="card h-100 shadow-sm">
+        <img [src]="baseUrl + product.imagePath" class="card-img-top" [alt]="product.name" />
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text fw-bold">{{ product.price | currency }}</p>
+          <a [routerLink]="['/products', product.id]" class="btn btn-sm btn-primary mt-auto">View</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="products.length === 0" class="text-center mt-4 text-muted">
+    No products found in this category.
+  </div>
+</div>

@@ -4,6 +4,7 @@ import { ProductService } from '../../../core/services/product.service';
 import { Product } from '../../../shared/models/ResponseDTOs/Product';
 import { envirnment } from '../../../../environments/environment';
 import { CartService } from '../../../core/services/cart/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -16,12 +17,12 @@ import { CartService } from '../../../core/services/cart/cart.service';
 export class ProductDetailsComponent {
   baseUrl = `${envirnment.baseUrl}`;
   product: Product = {
-    id: 0, name: "", description: "", price: 0, stock: 0, categoryId: 0,
-    category: { id: 0, name: '' }, imagePath: ""
+    id: 0, name: "", description: "", price: 0, stock: 0, unitSize: '', sku: '', categoryId: 0,
+    category: { id: 0, name: '', description: '', imagePath: '' }, imagePath: ""
   };
 
   constructor(private productService: ProductService, private cartService: CartService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute, private toastr: ToastrService) { }
 
   ngOnInit(): void
   {
@@ -33,7 +34,8 @@ export class ProductDetailsComponent {
       },
       error: (error) =>
       {
-        console.log('error', error);
+        this.toastr.error('Error when fetching the product');
+        console.log('Error when fetching the product', error);
       }
 
     });
@@ -41,7 +43,7 @@ export class ProductDetailsComponent {
 
   addToCart(product: Product): void {
     this.cartService.addToCart(product);
-    alert('Product added to cart successfully!');
+    this.toastr.success('Product added to cart successfully');
     const cart = localStorage.getItem('cart-items');
     console.log(`cart-items: ${cart}`)
   }

@@ -1,4 +1,4 @@
-<footer class="bg-dark text-white pt-4 pb-2 mt-auto">
+<footer *ngIf="isLoggedIn()" class="bg-dark text-white pt-4 pb-2 mt-auto">
   <div class="container">
     <div class="row">
 
@@ -14,7 +14,6 @@
         <ul class="list-unstyled">
           <li><a routerLink="/products" class="text-white text-decoration-none">Products</a></li>
           <li><a routerLink="/cart" class="text-white text-decoration-none">Cart</a></li>
-          <li><a routerLink="/auth/login" class="text-white text-decoration-none">Login</a></li>
         </ul>
       </div>
 

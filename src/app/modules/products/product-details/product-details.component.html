@@ -16,16 +16,16 @@
           <h2 class="mb-3">{{ product.name }}</h2>
 
           <p class="card-text">
-            <strong>Description:</strong> {{ product.description }}
+            <strong>Description: </strong> {{ product.description }}
           </p>
 
           <p class="card-text">
-            <strong>Price:</strong>
+            <strong>Price: </strong>
             <span class="text-success">{{ product.price | currency }}</span>
           </p>
 
           <p class="card-text">
-            <strong>Stock:</strong>
+            <strong>Stock: </strong>
             <span [ngClass]="{
                   'text-success' : product.stock>
               0,
@@ -36,7 +36,7 @@
           </p>
 
           <p class="card-text">
-            <strong>Category Name:</strong>
+            <strong>Category Name: </strong>
             <span class="text-success">{{ product.category.name }}</span>
           </p>
 

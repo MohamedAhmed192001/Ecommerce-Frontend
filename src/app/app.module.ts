@@ -10,6 +10,13 @@ import { ProductsModule } from './modules/products/products.module';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { AdminModule } from './modules/admin/admin.module';
+import { HomeComponent } from './modules/home/components/home/home.component';
+import { HomeModule } from './modules/home/home.module';
+import { PaymentModule } from './modules/payment/payment.module';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 @NgModule({
   declarations: [
@@ -22,7 +29,17 @@ import { AdminModule } from './modules/admin/admin.module';
     AppRoutingModule,
     AuthModule,
     ProductsModule,
-    AdminModule
+    AdminModule,
+    HomeModule,
+    PaymentModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(
+      {
+        timeOut: 3000,
+        positionClass: 'toast-bottom-right',
+        preventDuplicates: true
+      }
+    )
   ],
   providers: [
     {

@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <h2 class="mb-3">User Management</h2>
+
+  <button class="btn btn-primary mb-3" routerLink="/admin/add-user">
+    + Add New User
+  </button>
+
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.userName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.address }}</td>
+        <td>
+          <span class="badge bg-info text-dark">{{ user.role }}</span>
+        </td>
+        <td>
+          <button class="btn btn-warning btn-sm me-2" [routerLink]="['/admin/update-user/', user.id]">
+            Edit
+          </button>
+          <button class="btn btn-danger btn-sm" (click)="deleteUser(user.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

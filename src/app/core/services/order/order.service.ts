@@ -19,4 +19,8 @@ export class OrderService {
     return this.http.post(`${this.baseUrl}/place-order`, order);
   }
 
+  getUserOrders(userId: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/get-user-orders` + userId);
+  }
+
 }

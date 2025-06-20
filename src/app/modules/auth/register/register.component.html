@@ -1,13 +1,4 @@
 <div class="container mt-5" style="max-width: 500px;">
-  <!-- ✅ Show success message always -->
-  <div *ngIf="successMessage" style="color: green; margin-bottom: 10px;">
-    {{ successMessage }}
-  </div>
-
-  <!-- ❌ Show error message -->
-  <div *ngIf="errorMessage" style="color: red; margin-bottom: 10px;">
-    {{ errorMessage }}
-  </div>
   
 
   <form *ngIf="!registerSubmited" [formGroup]="registerForm" (ngSubmit)="onSubmit()">

@@ -28,9 +28,6 @@ export class PlaceOrderComponent {
   
 
   ngOnInit(): void {
-
-
-
    
   }
 

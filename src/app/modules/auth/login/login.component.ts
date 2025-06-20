@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { envirnment } from '../../../../environments/environment';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { CartService } from '../../../core/services/cart/cart.service';
 
 @Component({
   selector: 'app-login',
@@ -13,10 +15,9 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   //private apiUrl = '${envirnment.apiUrl}/auth';
   loginForm: FormGroup;
-  errorMessage = '';
-  successMessage = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router,
+    private toastr: ToastrService, private cartService: CartService) {
     this.loginForm = fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -30,19 +31,19 @@ export class LoginComponent {
       {
         next: (response) => {
           if (response && response.token) {
+            this.toastr.info('You are now logged in.');
             localStorage.setItem('token', response.token);
-            this.successMessage = "Login Successful!";
-            console.log("Token saved:", response.token);
+            this.cartService.getCart();
 
             // ✅ Navigate to /products after token is saved
-            this.router.navigate(['/products']);
+            this.router.navigate(['/home']);
           } else {
-            this.errorMessage = "No token received!";
+            this.toastr.error('No token received');
           }
         },
           error: (error) => {
             localStorage.removeItem('token'); // Clean up any old token
-            this.errorMessage = "Invalid email or password.";
+            this.toastr.error('Invalid email or password');
             console.error(error);
           }
       })

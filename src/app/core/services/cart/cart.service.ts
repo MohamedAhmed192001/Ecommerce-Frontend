@@ -2,15 +2,36 @@ import { Injectable } from '@angular/core';
 import { CartItem } from '../../../shared/models/CreateDTOs/cart-item';
 import { parse } from 'jest-editor-support';
 import { Product } from '../../../shared/models/ResponseDTOs/Product';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  userId: string = '';
+  private storageKey = `cart_${this.getUserIdFromToken()}`;
 
-  private storageKey = 'cart-items';
   private emptyCart: CartItem[] = [];
-  constructor() { }
+  constructor(private toastr: ToastrService) { }
+
+  getUserIdFromToken(): string {
+    const token = localStorage.getItem('token');
+    if (!token) return '';
+
+    try {
+
+      const payload = JSON.parse(atob(token?.split('.')[1]));
+      return payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+
+    } catch (e) {
+
+      this.toastr.error('Invalid token');
+      return '';
+
+    }
+
+
+  }
 
   getCart(): CartItem[] {
 
