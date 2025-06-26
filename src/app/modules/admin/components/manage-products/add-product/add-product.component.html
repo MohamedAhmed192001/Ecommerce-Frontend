@@ -1,69 +1,108 @@
-<div class="container mt-5">
+<div class="container my-5">
   <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card shadow">
-        <div class="card-header bg-primary text-white">
-          <h5 class="mb-0">✏️ Add Product</h5>
+    <div class="col-lg-8">
+
+      <!-- Card -->
+      <div class="card border-0 shadow rounded-4">
+        <div class="card-header bg-primary text-white rounded-top-4">
+          <h5 class="mb-0">🛍️ Add New Product</h5>
         </div>
-        <div class="card-body">
+
+        <div class="card-body p-4">
           <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
-            <!-- Name -->
+
+            <!-- Product Name -->
             <div class="mb-3">
               <label for="name" class="form-label">Product Name</label>
-              <input type="text" formControlName="name" class="form-control" id="name" />
+              <input type="text"
+                     class="form-control"
+                     formControlName="name"
+                     id="name"
+                     placeholder="e.g. Fresh Milk 1L" />
             </div>
 
             <!-- Description -->
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>
-              <textarea formControlName="description" class="form-control" id="description" rows="3"></textarea>
+              <textarea class="form-control"
+                        formControlName="description"
+                        id="description"
+                        rows="3"
+                        placeholder="Enter a short product description"></textarea>
             </div>
 
-            <!-- Price -->
-            <div class="mb-3">
-              <label for="price" class="form-label">Price</label>
-              <input type="number" formControlName="price" class="form-control" id="price" />
+            <!-- Price & Stock -->
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="price" class="form-label">Price ($)</label>
+                <input type="number"
+                       class="form-control"
+                       formControlName="price"
+                       id="price"
+                       placeholder="e.g. 4.99" />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="stock" class="form-label">Stock Quantity</label>
+                <input type="number"
+                       class="form-control"
+                       formControlName="stock"
+                       id="stock"
+                       placeholder="e.g. 50" />
+              </div>
             </div>
 
-            <!-- Stock -->
-            <div class="mb-3">
-              <label for="stock" class="form-label">Stock</label>
-              <input type="number" formControlName="stock" class="form-control" id="stock" />
+            <!-- Unit Size & SKU -->
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="unitSize" class="form-label">Unit Size</label>
+                <input type="text"
+                       class="form-control"
+                       formControlName="unitSize"
+                       id="unitSize"
+                       placeholder="e.g. 1L, 500g" />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="sku" class="form-label">SKU</label>
+                <input type="text"
+                       class="form-control"
+                       formControlName="sku"
+                       id="sku"
+                       placeholder="e.g. MILK001" />
+              </div>
             </div>
 
-            <!-- Unit Size -->
-            <div class="mb-3">
-              <label for="unitSize" class="form-label">Unit Size</label>
-              <input type="text" formControlName="unitSize" class="form-control" id="unitSize" />
-            </div>
-
-            <!-- Sku -->
-            <div class="mb-3">
-              <label for="sku" class="form-label">Sku</label>
-              <input type="text" formControlName="sku" class="form-control" id="sku" />
-            </div>
-
+            <!-- Category -->
             <div class="mb-3">
               <label for="categoryId" class="form-label">Category</label>
-              <select class="form-select" formControlName="categoryId">
+              <select class="form-select"
+                      formControlName="categoryId"
+                      id="categoryId">
                 <option value="" disabled selected>-- Select Category --</option>
                 <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
               </select>
             </div>
 
-            <div class="mb-3">
-              <label for="imageFile" class="form-label">Add Product Image</label>
-              <input type="file" class="form-control" (change)="onImageSelected($event)" />
+            <!-- Image Upload -->
+            <div class="mb-4">
+              <label for="imageFile" class="form-label">Product Image</label>
+              <input type="file"
+                     class="form-control"
+                     id="imageFile"
+                     (change)="onImageSelected($event)" />
             </div>
 
             <!-- Submit -->
-            <button type="submit" class="btn btn-success" [disabled]="productForm.invalid">
-              💾 Add Product
-            </button>
+            <div class="text-end">
+              <button type="submit"
+                      class="btn btn-success px-4 rounded-pill"
+                      [disabled]="productForm.invalid">
+                💾 Add Product
+              </button>
+            </div>
           </form>
         </div>
       </div>
+
     </div>
   </div>
 </div>
-

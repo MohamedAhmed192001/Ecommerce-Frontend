@@ -3,6 +3,7 @@ import { ProductService } from '../../../../core/services/product.service';
 import { Product } from '../../../../shared/models/ResponseDTOs/Product';
 import { envirnment } from '../../../../../environments/environment';
 import { Route, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class ManageProductsComponent {
   products: Product[] = [];
  
 
-  constructor(private productService: ProductService, private router: Router) { }
+  constructor(private productService: ProductService,
+    private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe({
@@ -39,7 +41,7 @@ export class ManageProductsComponent {
     this.productService.deleteProduct(productId).subscribe({
       next: successDelete => {
         console.log(successDelete);
-        alert('Product deleted successfully!')
+        this.toastr.success('Product deleted successfully');
         this.products = this.products.filter(p => p.id !== productId);
       },
       error: err => { console.error('Error occureed when delete the product: ', err) }

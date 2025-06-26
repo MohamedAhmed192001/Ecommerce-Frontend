@@ -1,47 +1,70 @@
 <div class="container mt-4">
 
 
-  <div class="bg-light p-4 text-center rounded shadow-sm mb-4">
-    <h2>Welcome to Smart Supply</h2>
-    <p>Explore top products, categories, and more.</p>
-    <a routerLink="/products" class="btn btn-primary btn-lg">🛒 Start Shopping</a>
+  <!-- Welcome Hero Section -->
+  <div class="bg-white border rounded-4 shadow-sm p-5 mb-5 text-center">
+    <h1 class="fw-bold text-dark mb-3">👋 Welcome to <span class="text-primary">Smart Supply</span></h1>
+    <p class="lead text-muted mb-4">Order household essentials directly from the factory. Browse top products and categories tailored for your store.</p>
+    <a routerLink="/products" class="btn btn-primary btn-lg rounded-pill shadow-sm">
+      🛒 Start Shopping
+    </a>
   </div>
 
-  Categories
-  <h4 class="mb-3">Shop by Category</h4>
-  <div class="row mb-4">
-    <div class="col-md-3" *ngFor="let cat of categories">
-      <div class="card text-center shadow-sm">
+  <!-- Categories Section -->
+  <h4 class="fw-semibold mb-4 text-dark">🛍️ Shop by Category</h4>
+  <div class="row g-4">
+    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let cat of categories">
+      <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden text-center">
+
+        <!-- Category Image -->
+        <img [src]="baseUrl + cat.imagePath"
+             [alt]="cat.name"
+             class="img-fluid"
+             style="height: 200px; object-fit: cover;" />
+
+        <!-- Category Info -->
         <div class="card-body">
-          <img [src]="baseUrl + cat.imagePath"
-               alt="{{ cat.name }}"
-               class="card-img-top"
-               style="height: 200px; object-fit: cover;" />
-          <div class="card-body">
-            <h5 class="card-title">{{ cat.name }}</h5>
-            <p class="card-text text-muted">{{ cat.description }}</p>
-            <a [routerLink]="['/home', cat.id]" class="btn btn-outline-primary btn-sm">Browse</a>
-          </div>
-        </div>
-      </div>
-    </div>
+          <h5 class="card-title fw-bold text-primary">{{ cat.name }}</h5>
+          <p class="card-text text-muted small">{{ cat.description }}</p>
 
-
-    <h4 class="mb-3">🔥 Featured Products</h4>
-    <div class="row">
-      <div class="col-md-3" *ngFor="let product of featuredProducts">
-        <div class="card h-100 shadow-sm">
-          <a [href]="baseUrl + product.imagePath" class="text-decoration-none">
-            <img [src]="baseUrl + product.imagePath" class="card-img-top" [alt]="product.name">
+          <a [routerLink]="['/home', cat.id]" class="btn btn-outline-primary btn-sm rounded-pill mt-2">
+            Browse
           </a>
-          <div class="card-body">
-            <h5 class="card-title">{{ product.name }}</h5>
-            <p class="card-text">{{ product.price | currency }}</p>
-            <a [routerLink]="['/products', product.id]" class="btn btn-primary btn-sm">View</a>
-          </div>
         </div>
       </div>
     </div>
-
   </div>
+
+
+  <div class="container my-4">
+    <h4 class="fw-semibold mb-4 text-dark">🔥 Featured Products</h4>
+
+    <div class="row g-4">
+      <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let product of featuredProducts">
+        <div class="card h-100 border-0 shadow rounded-4 overflow-hidden">
+
+          <!-- Product Image -->
+          <div class="bg-light d-flex align-items-center justify-content-center" style="height: 180px;">
+            <img [src]="baseUrl + product.imagePath"
+                 [alt]="product.name"
+                 class="img-fluid"
+                 style="max-height: 140px; object-fit: contain;">
+          </div>
+
+          <!-- Card Body -->
+          <div class="card-body text-center">
+            <h6 class="card-title mb-2 text-primary fw-bold">{{ product.name }}</h6>
+            <p class="text-success fw-semibold mb-3">{{ product.price | currency }}</p>
+
+            <a [routerLink]="['/products', product.id]" class="btn btn-outline-primary btn-sm rounded-pill">
+              <i class="bi bi-eye me-1"></i> View
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
+

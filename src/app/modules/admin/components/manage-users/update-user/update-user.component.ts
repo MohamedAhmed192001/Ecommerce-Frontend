@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../../core/services/user/user.service';
 import { UserResponse } from '../../../../../shared/models/ResponseDTOs/user-response';
 import { UpdateUserDto } from '../../../../../shared/models/UpdateDTOs/update-user-dto';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-user',
@@ -20,7 +21,7 @@ export class UpdateUserComponent {
   userId: string | null;
 
   constructor(private route: ActivatedRoute, private userService: UserService,
-    private fb: FormBuilder, private router: Router)
+    private fb: FormBuilder, private router: Router, private toastr: ToastrService)
   {
     this.userId = route.snapshot.paramMap.get('userId');
     this.updateForm = fb.group({
@@ -67,7 +68,7 @@ export class UpdateUserComponent {
 
       this.userService.updateUser(this.userId, updatedUser).subscribe({
         next: success => {
-          alert('User updated successfully!');
+          this.toastr.success('User updated successfully');
           this.router.navigate(['/admin/users']);
           console.log(success);
         },

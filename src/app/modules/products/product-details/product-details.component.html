@@ -1,9 +1,64 @@
-<div class="container mt-5">
+<div class="container my-5">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-lg-8">
 
       <!-- Product Card -->
-      <div class="card shadow-lg">
+      <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+
+        <!-- Product Image -->
+        <div class="bg-light d-flex justify-content-center align-items-center" style="height: 240px;">
+          <img [src]="baseUrl + product.imagePath"
+               [alt]="product.name"
+               class="img-fluid"
+               style="max-height: 200px; object-fit: contain;">
+        </div>
+
+        <!-- Product Info -->
+        <div class="card-body p-4">
+
+          <h4 class="fw-semibold text-dark mb-2">{{ product.name }}</h4>
+          <p class="text-muted mb-3">{{ product.description }}</p>
+
+          <div class="mb-2">
+            <span class="fw-bold">Price:</span>
+            <span class="text-success fw-semibold">{{ product.price | currency }}</span>
+          </div>
+
+          <div class="mb-2">
+            <span class="fw-bold">Stock:</span>
+            <span [ngClass]="{
+                  'text-success' : product.stock>
+              0,
+              'text-danger': product.stock === 0
+              }">
+              {{ product.stock > 0 ? product.stock + ' available' : 'Out of stock' }}
+            </span>
+          </div>
+
+          <div class="mb-3">
+            <span class="fw-bold">Category:</span>
+            <span class="text-primary">{{ product.category?.name }}</span>
+          </div>
+
+          <button class="btn btn-primary w-100 rounded-pill"
+                  [disabled]="product.stock === 0"
+                  (click)="addToCart(product)">
+            <i class="bi bi-cart-plus me-2"></i> Add to Cart
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">-->
+
+      <!-- Product Card -->
+      <!--<div class="card shadow-lg">
         <a [href]="baseUrl + product.imagePath" class="text-decoration-none">
           <img [src]="baseUrl + product.imagePath"
                class="card-img-top"
@@ -49,4 +104,4 @@
 
     </div>
   </div>
-</div>
+</div>-->

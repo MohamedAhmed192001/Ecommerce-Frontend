@@ -1,30 +1,42 @@
 <div class="container-fluid">
-  <div class="row">
+  <div class="row min-vh-100">
 
     <!-- Sidebar -->
-    <div class="col-md-3 bg-dark text-white vh-100 p-3">
-      <h5>Admin Panel</h5>
-      <hr />
-      <ul class="nav flex-column">
+    <nav class="col-md-3 col-lg-2 bg-dark text-white p-4 d-flex flex-column shadow-sm">
+      <h5 class="fw-bold mb-4">⚙️ Admin Panel</h5>
+
+      <ul class="nav nav-pills flex-column gap-2">
         <li class="nav-item">
-          <a routerLink="categories" class="nav-link text-white">Manage Categories</a>
+          <a routerLink="categories" routerLinkActive="active"
+             class="nav-link text-white bg-opacity-10 hover-opacity">
+            📂 Manage Categories
+          </a>
         </li>
         <li class="nav-item">
-          <a routerLink="products" class="nav-link text-white">Manage Products</a>
+          <a routerLink="products" routerLinkActive="active"
+             class="nav-link text-white">
+            🛍️ Manage Products
+          </a>
         </li>
         <li class="nav-item">
-          <a routerLink="orders" class="nav-link text-white">Manage Orders</a>
+          <a routerLink="orders" routerLinkActive="active"
+             class="nav-link text-white">
+            📦 Manage Orders
+          </a>
         </li>
         <li class="nav-item">
-          <a routerLink="users" class="nav-link text-white">Manage Users</a>
+          <a routerLink="users" routerLinkActive="active"
+             class="nav-link text-white">
+            👥 Manage Users
+          </a>
         </li>
       </ul>
-    </div>
+    </nav>
 
-    <!-- Content -->
-    <div class="col-md-9 p-4">
+    <!-- Main Content Area -->
+    <main class="col-md-9 col-lg-10 p-4 bg-light">
       <router-outlet></router-outlet>
-    </div>
+    </main>
 
   </div>
 </div>

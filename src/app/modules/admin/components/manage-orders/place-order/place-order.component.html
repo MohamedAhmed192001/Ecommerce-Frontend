@@ -1,19 +1,44 @@
-<div class="container mt-4">
-  <h4>?? Shipping Info</h4>
+<div class="container my-5" style="max-width: 600px;">
+  <div class="card shadow-sm border-0 rounded-4 p-4 bg-white">
 
-  <form [formGroup]="checkoutForm" (ngSubmit)="placeOrder()">
-    <div class="mb-3">
-      <label class="form-label">Address</label>
-      <input type="text" class="form-control" formControlName="address">
-    </div>
+    <!-- Title -->
+    <h4 class="fw-bold mb-4 text-primary text-center">🚚 Shipping Information</h4>
 
-    <div class="mb-3">
-      <label class="form-label">Phone</label>
-      <input type="text" class="form-control" formControlName="phone">
-    </div>
+    <!-- Shipping Form -->
+    <form [formGroup]="checkoutForm" (ngSubmit)="placeOrder()">
 
-    <button type="submit" class="btn btn-success" [disabled]="checkoutForm.invalid">
-      Pay
-    </button>
-  </form>
+      <!-- Address -->
+      <div class="mb-3">
+        <label for="address" class="form-label">Address</label>
+        <input type="text"
+               id="address"
+               class="form-control"
+               placeholder="e.g. 25 Supermarket Street"
+               formControlName="address"
+               [ngClass]="{ 'is-invalid': checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched }" />
+        <div class="invalid-feedback">Address is required.</div>
+      </div>
+
+      <!-- Phone -->
+      <div class="mb-4">
+        <label for="phone" class="form-label">Phone Number</label>
+        <input type="text"
+               id="phone"
+               class="form-control"
+               placeholder="e.g. 01001234567"
+               formControlName="phone"
+               [ngClass]="{ 'is-invalid': checkoutForm.get('phone')?.invalid && checkoutForm.get('phone')?.touched }" />
+        <div class="invalid-feedback">Phone is required.</div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="d-grid">
+        <button type="submit"
+                class="btn btn-success rounded-pill"
+                [disabled]="checkoutForm.invalid">
+          💳 Proceed to Payment
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

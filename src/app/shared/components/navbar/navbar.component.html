@@ -1,4 +1,93 @@
-<nav *ngIf="isLoggedIn()" class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold" routerLink="/home">Smart Supply</a>
+
+    <!-- Toggler for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#smartNavbar"
+            aria-controls="smartNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="smartNavbar">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- Public Links -->
+        <li class="nav-item" *ngIf="!isAuthenticated">
+          <a class="nav-link" routerLink="/contact">Contact</a>
+        </li>
+
+        <!-- Authenticated User Links -->
+        <ng-container *ngIf="isAuthenticated && !isAdmin">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/products">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/orders">My Orders</a>
+          </li>
+        </ng-container>
+
+        <!-- Admin Only -->
+        <li class="nav-item" *ngIf="isAdmin">
+          <a class="nav-link" routerLink="/admin">Admin Panel</a>
+        </li>
+      </ul>
+
+      <!-- Right side user/cart/auth -->
+      <ul class="navbar-nav mb-2 mb-lg-0">
+
+        <!-- Cart for normal users -->
+        <li class="nav-item position-relative me-3" *ngIf="isAuthenticated && !isAdmin">
+          <a class="nav-link" routerLink="/cart">
+            <i class="bi bi-cart"></i> Cart
+            <span *ngIf="cartCount > 0"
+                  class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle">
+              {{ cartCount }}
+            </span>
+          </a>
+        </li>
+
+        <!-- Unauthenticated: Login / Register -->
+        <ng-container *ngIf="!isAuthenticated">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/register">Register</a>
+          </li>
+        </ng-container>
+
+        <!-- Authenticated User Dropdown -->
+        <ng-container>
+          <li class="nav-item dropdown" *ngIf="isAuthenticated">
+            <a class="nav-link dropdown-toggle"
+               href="#"
+               role="button"
+               data-bs-toggle="dropdown"
+               aria-expanded="false"
+               id="userDropdown">
+              {{ userName }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+            </ul>
+          </li>
+        </ng-container>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+<!--<nav *ngIf="isLoggedIn()" class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/home">MyShop</a>
 
@@ -17,10 +106,10 @@
         <li class="nav-item">
           <a class="nav-link" *ngIf="isAdmin()" routerLink="/admin">Admin Dashboard</a>
         </li>
-      </ul>
+      </ul>-->
 
       <!-- Right Side -->
-      <ul class="navbar-nav ms-auto">
+      <!--<ul class="navbar-nav ms-auto">
         <li *ngIf="!isLoggedIn()" class="nav-item">
           <a class="nav-link" routerLink="/auth/login">Login</a>
         </li>
@@ -34,4 +123,4 @@
       </ul>
     </div>
   </div>
-</nav>
+</nav>-->

@@ -41,10 +41,11 @@ export class LoginComponent {
             this.toastr.error('No token received');
           }
         },
-          error: (error) => {
+          error: (errMessage) => {
+            
             localStorage.removeItem('token'); // Clean up any old token
-            this.toastr.error('Invalid email or password');
-            console.error(error);
+            this.toastr.error(errMessage.error.message);
+            console.error(errMessage);
           }
       })
 

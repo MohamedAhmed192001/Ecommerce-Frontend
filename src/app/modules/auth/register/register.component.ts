@@ -32,7 +32,7 @@ export class RegisterComponent {
       this.authService.register(this.registerForm.value).subscribe({
         next: () =>
         {
-          this.toastr.success('Registered successfully! Please login');
+          this.toastr.success('Registered successfully! Please confirm your email before login');
           this.registerSubmited = true;
           setTimeout(() => { this.router.navigate(['/login']) }, 3000);
         },

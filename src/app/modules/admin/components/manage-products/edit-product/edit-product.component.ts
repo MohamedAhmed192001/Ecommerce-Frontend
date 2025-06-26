@@ -28,6 +28,8 @@ export class EditProductComponent {
       description: ['', Validators.required],
       price: [0, [Validators.required, Validators.min(0)]],
       stock: [0, [Validators.required, Validators.min(0)]],
+      unitSize: ['', [Validators.required, Validators.min(0)]],
+      sku: ['', [Validators.required, Validators.min(0)]],
       categoryId: [null, Validators.required]
     });
 
@@ -82,6 +84,8 @@ export class EditProductComponent {
       formData.append('description', this.productForm.value.description);
       formData.append('price', this.productForm.value.price);
       formData.append('stock', this.productForm.value.stock);
+      formData.append('unitSize', this.productForm.value.unitSize);
+      formData.append('sku', this.productForm.value.sku);
       formData.append('categoryId', this.productForm.value.categoryId);
       if (this.selectedImageFile) 
         formData.append('imageFile', this.selectedImageFile);

@@ -1,20 +1,35 @@
-<div class="container mt-4">
-  <h3 class="mb-4">🗂️ Products in This Category</h3>
+<div class="container my-5">
+  <h3 class="fw-semibold mb-4 text-dark">🗂️ Products in This Category</h3>
 
-  <div class="row">
-    <div class="col-md-3 mb-4" *ngFor="let product of products">
-      <div class="card h-100 shadow-sm">
-        <img [src]="baseUrl + product.imagePath" class="card-img-top" [alt]="product.name" />
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">{{ product.name }}</h5>
-          <p class="card-text fw-bold">{{ product.price | currency }}</p>
-          <a [routerLink]="['/products', product.id]" class="btn btn-sm btn-primary mt-auto">View</a>
+  <div class="row g-4">
+    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let product of products">
+      <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+
+        <!-- Image section -->
+        <div class="bg-light d-flex justify-content-center align-items-center" style="height: 180px;">
+          <img [src]="baseUrl + product.imagePath"
+               [alt]="product.name"
+               class="img-fluid"
+               style="max-height: 140px; object-fit: contain;">
         </div>
+
+        <!-- Info -->
+        <div class="card-body d-flex flex-column text-center">
+          <h6 class="card-title fw-bold text-primary">{{ product.name }}</h6>
+          <p class="fw-semibold text-success mb-3">{{ product.price | currency }}</p>
+
+          <a [routerLink]="['/products', product.id]"
+             class="btn btn-outline-primary btn-sm rounded-pill mt-auto">
+            <i class="bi bi-eye me-1"></i> View
+          </a>
+        </div>
+
       </div>
     </div>
   </div>
 
-  <div *ngIf="products.length === 0" class="text-center mt-4 text-muted">
-    No products found in this category.
+  <!-- Empty state -->
+  <div *ngIf="products.length === 0" class="text-center text-muted mt-5">
+    <i class="bi bi-box"></i> No products found in this category.
   </div>
 </div>

@@ -1,35 +1,67 @@
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h3>Manage Products</h3>
-  <button class="btn btn-success" [routerLink]="['/admin/add/']">➕ Add Product</button>
-</div>
+<div class="container my-5">
 
-<!-- Product Table -->
-<table class="table table-bordered table-hover">
-  <thead class="table-dark">
-    <tr>
-      <th>Image</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Stock</th>
-      <th>Unit Size</th>
-      <th>Sku</th>
-      <th>Category Name</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of products">
-      <td><img [src]="baseUrl + product.imagePath" width="60" class="img-thumbnail"></td>
-      <td>{{ product.name }}</td>
-      <td>{{ product.price | currency }}</td>
-      <td>{{ product.stock }}</td>
-      <td>{{ product.unitSize }}</td>
-      <td>{{ product.sku }}</td>
-      <td>{{ product.category.name }}</td>
-      <td>
-        <button class="btn btn-sm btn-primary me-1" [routerLink]="['/admin/edit/', product.id]">✏️ Edit</button>
-        <button class="btn btn-sm btn-danger" (click)="deleteProduct(product.id)">🗑️ Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <!-- Header Section -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold text-dark">🧾 Manage Products</h3>
+    <a class="btn btn-success rounded-pill shadow-sm" [routerLink]="['/admin/add']">
+      ➕ Add Product
+    </a>
+  </div>
+
+  <!-- Product Table -->
+  <div class="table-responsive shadow-sm">
+    <table class="table table-bordered table-hover align-middle">
+      <thead class="table-primary text-center">
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Unit Size</th>
+          <th>SKU</th>
+          <th>Category</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let product of products">
+          <!-- Image -->
+          <td class="text-center">
+            <img [src]="baseUrl + product.imagePath"
+                 class="img-thumbnail"
+                 style="width: 60px; height: 60px; object-fit: contain;">
+          </td>
+
+          <!-- Info -->
+          <td>{{ product.name }}</td>
+          <td class="text-success fw-semibold">{{ product.price | currency }}</td>
+          <td>
+            <span [ngClass]="{
+                  'text-danger fw-bold' : product.stock < 10,
+              'text-success': product.stock >= 10
+            }">
+              {{ product.stock }}
+            </span>
+          </td>
+          <td>{{ product.unitSize }}</td>
+          <td>{{ product.sku }}</td>
+          <td>{{ product.category.name }}</td>
+
+          <!-- Actions -->
+          <td class="text-center">
+            <div class="btn-group">
+              <a class="btn btn-sm btn-outline-primary" [routerLink]="['/admin/edit', product.id]">
+                ✏️ Edit
+              </a>
+              <button class="btn btn-sm btn-outline-danger" (click)="deleteProduct(product.id)">
+                🗑️ Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

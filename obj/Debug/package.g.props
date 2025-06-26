@@ -18,6 +18,7 @@
     <PackageJsonDependenciesAngularPlatformBrowserDynamic Condition="$(PackageJsonDependenciesAngularPlatformBrowserDynamic) == ''">^19.2.0</PackageJsonDependenciesAngularPlatformBrowserDynamic>
     <PackageJsonDependenciesAngularRouter Condition="$(PackageJsonDependenciesAngularRouter) == ''">^19.2.0</PackageJsonDependenciesAngularRouter>
     <PackageJsonDependenciesStripeStripeJs Condition="$(PackageJsonDependenciesStripeStripeJs) == ''">^7.3.1</PackageJsonDependenciesStripeStripeJs>
+    <PackageJsonDependenciesBootstrapIcons Condition="$(PackageJsonDependenciesBootstrapIcons) == ''">^1.13.1</PackageJsonDependenciesBootstrapIcons>
     <PackageJsonDependenciesJestEditorSupport Condition="$(PackageJsonDependenciesJestEditorSupport) == ''">*</PackageJsonDependenciesJestEditorSupport>
     <PackageJsonDependenciesNgxToastr Condition="$(PackageJsonDependenciesNgxToastr) == ''">^19.0.0</PackageJsonDependenciesNgxToastr>
     <PackageJsonDependenciesRxjs Condition="$(PackageJsonDependenciesRxjs) == ''">~7.8.0</PackageJsonDependenciesRxjs>
