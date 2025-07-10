@@ -11,6 +11,14 @@ export class OrderService {
   baseUrl = `${envirnment.apiUrl}/Orders`
   constructor(private http: HttpClient) { }
 
+  getUserIdFromToken(): string {
+    const token = localStorage.getItem('token');
+    if (token == null)
+      return '';
+    const payload = JSON.parse(atob(token?.split('.')[1]));
+    return payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+  }
+
   getAllOrders(): Observable<any> {
     return this.http.get(`${this.baseUrl}/get-all-orders`);
   }
@@ -20,7 +28,7 @@ export class OrderService {
   }
 
   getUserOrders(userId: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/get-user-orders` + userId);
+    return this.http.get(`${this.baseUrl}/get-user-orders/` + userId);
   }
 
 }

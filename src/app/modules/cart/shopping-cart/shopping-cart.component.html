@@ -4,6 +4,9 @@
   <!-- Empty Cart Message -->
   <div *ngIf="cartItems.length === 0" class="alert alert-info text-center">
     Your cart is empty. Start shopping to add items.
+    <button class="btn btn-success btn-sm rounded-pill" [routerLink]="['/products']">
+      Start
+    </button>
   </div>
 
   <!-- Cart Table -->

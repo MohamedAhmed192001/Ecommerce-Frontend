@@ -33,7 +33,7 @@
           <a class="btn btn-outline-primary btn-sm rounded-pill" [routerLink]="['/products', product.id]">
             View
           </a>
-          <button class="btn btn-success btn-sm rounded-pill" [disabled]="product.stock === 0" (click)="addToCart(product)">
+          <button class="btn btn-success btn-sm rounded-pill" *ngIf="!isAdmin" [disabled]="product.stock === 0" (click)="addToCart(product)">
             Add to Cart
           </button>
         </div>

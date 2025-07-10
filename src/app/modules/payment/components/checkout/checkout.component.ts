@@ -62,6 +62,7 @@ export class CheckoutComponent {
 
     try {
       const session = await firstValueFrom(this.paymentService.placeOrderAndPay(order));
+      this.cartService.clearCart();
       const stripe = await this.stripePromise;
       await stripe?.redirectToCheckout({ sessionId: session.sessionId });
     } catch (err) {

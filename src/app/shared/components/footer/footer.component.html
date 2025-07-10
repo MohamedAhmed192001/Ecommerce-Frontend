@@ -15,9 +15,9 @@
       <div class="col-md-4 mb-4">
         <h6 class="text-uppercase fw-bold">Quick Links</h6>
         <ul class="list-unstyled">
-          <li><a href="/products" class="text-light text-decoration-none">Products</a></li>
-          <li><a href="/orders" class="text-light text-decoration-none">My Orders</a></li>
-          <li><a href="/contact" class="text-light text-decoration-none">Contact</a></li>
+          <li><a href="/products" *ngIf="isAuthenticated && !isAdmin" class="text-light text-decoration-none">Products</a></li>
+          <li><a href="/my-orders" *ngIf="isAuthenticated && !isAdmin" class="text-light text-decoration-none">My Orders</a></li>
+          <li><a href="/contact" *ngIf="isAuthenticated && !isAdmin" class="text-light text-decoration-none">Contact</a></li>
           <li><a href="/about" class="text-light text-decoration-none">About Us</a></li>
         </ul>
       </div>
@@ -39,38 +39,3 @@
     </div>
   </div>
 </footer>
-<!--<footer *ngIf="isLoggedIn()" class="bg-dark text-white pt-4 pb-2 mt-auto">
-  <div class="container">
-    <div class="row">-->
-
-      <!-- About -->
-      <!--<div class="col-md-4 mb-3">
-        <h5>MyShop</h5>
-        <p>Your trusted store for great products at great prices.</p>
-      </div>-->
-
-      <!-- Quick Links -->
-      <!--<div class="col-md-4 mb-3">
-        <h5>Quick Links</h5>
-        <ul class="list-unstyled">
-          <li><a routerLink="/products" class="text-white text-decoration-none">Products</a></li>
-          <li><a routerLink="/cart" class="text-white text-decoration-none">Cart</a></li>
-        </ul>
-      </div>-->
-
-      <!-- Contact -->
-      <!--<div class="col-md-4 mb-3">
-        <h5>Contact Us</h5>
-        <p>Email: dev.mohamed.ahmed.2001&#64;gmail.com</p>
-        <p>Phone: +20 1211524277</p>
-      </div>
-
-    </div>
-
-    <hr class="bg-light" />
-
-    <div class="text-center">
-      <small>&copy; {{ currentYear }} MyShop. All rights reserved.</small>
-    </div>
-  </div>
-</footer>-->

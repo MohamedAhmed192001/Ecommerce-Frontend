@@ -1,6 +1,4 @@
-
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
   <div class="container-fluid">
     <!-- Brand -->
     <a class="navbar-brand fw-bold" routerLink="/home">Smart Supply</a>
@@ -11,36 +9,42 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Navbar links -->
+    <!-- Collapsible Content -->
     <div class="collapse navbar-collapse" id="smartNavbar">
+
+      <!-- Left: Navigation Links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <!-- Public Links -->
-        <li class="nav-item" *ngIf="!isAuthenticated">
-          <a class="nav-link" routerLink="/contact">Contact</a>
+
+        <!-- Public -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about">About Us</a>
         </li>
 
-        <!-- Authenticated User Links -->
+        <!-- Normal User (Authenticated, not Admin) -->
         <ng-container *ngIf="isAuthenticated && !isAdmin">
           <li class="nav-item">
             <a class="nav-link" routerLink="/products">Products</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/orders">My Orders</a>
+            <a class="nav-link" routerLink="/my-orders">My Orders</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/contact">Contact</a>
           </li>
         </ng-container>
 
-        <!-- Admin Only -->
+        <!-- Admin -->
         <li class="nav-item" *ngIf="isAdmin">
           <a class="nav-link" routerLink="/admin">Admin Panel</a>
         </li>
       </ul>
 
-      <!-- Right side user/cart/auth -->
-      <ul class="navbar-nav mb-2 mb-lg-0">
+      <!-- Right: Auth, Cart, Profile -->
+      <ul class="navbar-nav mb-2 mb-lg-0 d-flex align-items-center gap-2">
 
-        <!-- Cart for normal users -->
-        <li class="nav-item position-relative me-3" *ngIf="isAuthenticated && !isAdmin">
-          <a class="nav-link" routerLink="/cart">
+        <!-- Cart (Only for authenticated users, not admin) -->
+        <li class="nav-item position-relative" *ngIf="isAuthenticated && !isAdmin">
+          <a class="nav-link d-flex align-items-center gap-1" routerLink="/cart">
             <i class="bi bi-cart"></i> Cart
             <span *ngIf="cartCount > 0"
                   class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle">
@@ -49,7 +53,7 @@
           </a>
         </li>
 
-        <!-- Unauthenticated: Login / Register -->
+        <!-- Guest: Login / Register -->
         <ng-container *ngIf="!isAuthenticated">
           <li class="nav-item">
             <a class="nav-link" routerLink="/login">Login</a>
@@ -59,68 +63,29 @@
           </li>
         </ng-container>
 
-        <!-- Authenticated User Dropdown -->
-        <ng-container>
-          <li class="nav-item dropdown" *ngIf="isAuthenticated">
-            <a class="nav-link dropdown-toggle"
-               href="#"
-               role="button"
-               data-bs-toggle="dropdown"
-               aria-expanded="false"
-               id="userDropdown">
-              {{ userName }}
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-              <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
-            </ul>
-          </li>
-        </ng-container>
+        <!-- Authenticated: Dropdown Menu -->
+        <li class="nav-item dropdown" *ngIf="isAuthenticated">
+          <a class="nav-link dropdown-toggle"
+             href="#"
+             role="button"
+             data-bs-toggle="dropdown"
+             aria-expanded="false"
+             id="userDropdown">
+            👤 {{ userName }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userDropdown">
+            <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+            <li *ngIf="!isAdmin">
+              <a class="dropdown-item" routerLink="/my-messages">🗨️ My Messages</a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item text-danger" (click)="logout()">Logout</a>
+            </li>
+          </ul>
+        </li>
 
       </ul>
     </div>
   </div>
 </nav>
-
-
-
-
-
-<!--<nav *ngIf="isLoggedIn()" class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/home">MyShop</a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="mainNav">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/products">Products</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/cart">Cart</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" *ngIf="isAdmin()" routerLink="/admin">Admin Dashboard</a>
-        </li>
-      </ul>-->
-
-      <!-- Right Side -->
-      <!--<ul class="navbar-nav ms-auto">
-        <li *ngIf="!isLoggedIn()" class="nav-item">
-          <a class="nav-link" routerLink="/auth/login">Login</a>
-        </li>
-        <li *ngIf="!isLoggedIn()" class="nav-item">
-          <a class="nav-link" routerLink="/register">Register</a>
-        </li>
-
-        <li *ngIf="isLoggedIn()" class="nav-item">
-          <a class="nav-link" (click)="logout()">Logout</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>-->

@@ -37,10 +37,11 @@
 
           <div class="mb-3">
             <span class="fw-bold">Category:</span>
-            <span class="text-primary">{{ product.category?.name }}</span>
+            <span class="text-primary">{{ product.category.name }}</span>
           </div>
 
           <button class="btn btn-primary w-100 rounded-pill"
+                  *ngIf="!isAdmin"
                   [disabled]="product.stock === 0"
                   (click)="addToCart(product)">
             <i class="bi bi-cart-plus me-2"></i> Add to Cart

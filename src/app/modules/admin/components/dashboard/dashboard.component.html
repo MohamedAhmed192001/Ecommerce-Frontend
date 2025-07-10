@@ -2,13 +2,16 @@
   <div class="row min-vh-100">
 
     <!-- Sidebar -->
-    <nav class="col-md-3 col-lg-2 bg-dark text-white p-4 d-flex flex-column shadow-sm">
-      <h5 class="fw-bold mb-4">⚙️ Admin Panel</h5>
+    <nav class="col-12 col-md-3 col-lg-2 bg-dark text-white p-4 d-flex flex-column shadow-sm position-sticky top-0">
+      <h5 class="fw-semibold mb-4 border-bottom pb-2">
+        ⚙️ Admin Panel
+      </h5>
 
       <ul class="nav nav-pills flex-column gap-2">
         <li class="nav-item">
           <a routerLink="categories" routerLinkActive="active"
-             class="nav-link text-white bg-opacity-10 hover-opacity">
+             class="nav-link text-white"
+             [routerLinkActiveOptions]="{ exact: true }">
             📂 Manage Categories
           </a>
         </li>
@@ -30,11 +33,17 @@
             👥 Manage Users
           </a>
         </li>
+        <li class="nav-item">
+          <a routerLink="contact-messages" routerLinkActive="active"
+             class="nav-link text-white">
+            📨 Contact Messages
+          </a>
+        </li>
       </ul>
     </nav>
 
-    <!-- Main Content Area -->
-    <main class="col-md-9 col-lg-10 p-4 bg-light">
+    <!-- Main Content -->
+    <main class="col-12 col-md-9 col-lg-10 p-4 bg-light">
       <router-outlet></router-outlet>
     </main>
 

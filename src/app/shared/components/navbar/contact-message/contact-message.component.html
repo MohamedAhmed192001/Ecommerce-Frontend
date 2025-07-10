@@ -1,0 +1,36 @@
+<div class="container my-5" style="max-width: 600px;">
+  <div class="card shadow border-0 rounded-4">
+    <div class="card-body p-4">
+      <h4 class="mb-4 text-primary text-center">📬 Contact Smart Supply Admin</h4>
+
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <!-- Subject -->
+        <div class="mb-3">
+          <label class="form-label">Subject</label>
+          <input type="text"
+                 class="form-control"
+                 formControlName="subject"
+                 placeholder="Subject of your message"
+                 [ngClass]="{ 'is-invalid': contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched }" />
+        </div>
+
+        <!-- Message -->
+        <div class="mb-3">
+          <label class="form-label">Message</label>
+          <textarea rows="4"
+                    class="form-control"
+                    formControlName="message"
+                    placeholder="Write your message here..."
+                    [ngClass]="{ 'is-invalid': contactForm.get('message')?.invalid && contactForm.get('message')?.touched }"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-end">
+          <button type="submit" class="btn btn-success px-4 rounded-pill" [disabled]="contactForm.invalid">
+            Send Message
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

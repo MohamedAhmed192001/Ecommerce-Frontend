@@ -14,14 +14,21 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProductListComponent {
   baseUrl = `${envirnment.baseUrl}`;
+  isAdmin = false;
   products: Product[] = [];
 
   constructor(private productService: ProductService, private cartService: CartService,
   private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.productService.getAllProducts().subscribe({
+    const token = localStorage.getItem('token');
 
+    if (token) {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      this.isAdmin = payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']?.includes('Admin') || false;
+    }
+
+    this.productService.getAllProducts().subscribe({
       next: (response) => { this.products = response; console.log(response) },
 
       error: (error) => {

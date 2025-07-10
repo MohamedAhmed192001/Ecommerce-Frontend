@@ -11,6 +11,7 @@ import { AddUserComponent } from './components/manage-users/add-user/add-user.co
 import { UpdateUserComponent } from './components/manage-users/update-user/update-user.component';
 import { ManageCategoriesComponent } from './components/manage-categories/manage-categories.component';
 import { AddAndEditCategoryComponent } from './components/manage-categories/add-and-edit-category/add-and-edit-category.component';
+import { ContactMessagesComponent } from './components/contact-messages/contact-messages.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: 'users', component: ManageUsersComponent },
       { path: 'add-user', component: AddUserComponent },
       { path: 'update-user/:userId', component: UpdateUserComponent },
+      { path: 'contact-messages', component: ContactMessagesComponent }
     ] 
   },
  

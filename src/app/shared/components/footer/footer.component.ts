@@ -8,12 +8,18 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
   currentYear: number = new Date().getFullYear();
+  isAuthenticated = false;
+  isAdmin = false;
 
-  isLoggedIn(): boolean {
+  ngOnInit(): void {
     const token = localStorage.getItem('token');
-    if (token)
-      return true
-    else
-      return false
+    
+    if (token) {
+      this.isAuthenticated = true;
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      this.isAdmin = payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']?.includes('Admin') || false;
+
+    }
+     
   }
 }

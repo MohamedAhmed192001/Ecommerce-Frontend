@@ -16,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProductDetailsComponent {
   baseUrl = `${envirnment.baseUrl}`;
+  isAdmin = false;
   product: Product = {
     id: 0, name: "", description: "", price: 0, stock: 0, unitSize: '', sku: '', categoryId: 0,
     category: { id: 0, name: '', description: '', imagePath: '' }, imagePath: ""
@@ -26,6 +27,13 @@ export class ProductDetailsComponent {
 
   ngOnInit(): void
   {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      this.isAdmin = payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']?.includes('Admin') || false;
+    }
+
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.productService.getProductDetails(id).subscribe({
       next: (response) =>

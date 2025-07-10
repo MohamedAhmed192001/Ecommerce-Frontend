@@ -1,0 +1,54 @@
+<div class="container mt-5">
+  <h4 class="mb-4 fw-semibold border-bottom pb-2">
+    🗨️ Your Messages
+  </h4>
+
+  <!-- No messages -->
+  <div *ngIf="myMessages.length === 0" class="alert alert-info text-center">
+    <i class="bi bi-info-circle"></i> You haven't sent any messages yet.
+  </div>
+
+  <!-- Loop through messages -->
+  <div *ngFor="let msg of myMessages" class="card mb-4 shadow-sm border-0">
+    <div class="card-body">
+      <!-- Message Header -->
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title text-primary mb-0">
+          {{ msg.subject }}
+        </h5>
+        <span class="badge rounded-pill"
+              [ngClass]="msg.isReadByAdmin ? 'bg-secondary' : 'bg-warning text-dark'">
+          {{ msg.isReadByAdmin ? 'Read' : 'Unread' }}
+        </span>
+      </div>
+
+      <!-- Message Body -->
+      <p class="mb-2">{{ msg.message }}</p>
+      <p class="text-muted small">Sent at: {{ msg.sentAt | date: 'short' }}</p>
+
+      <!-- Admin Reply Section -->
+      <div *ngIf="msg.reply" class="alert alert-success mt-3 mb-2">
+        <strong>💬 Admin Reply:</strong> {{ msg.reply }}
+        <p class="text-muted small mb-0">Replied at: {{ msg.replyedAt | date: 'short' }}</p>
+      </div>
+
+      <!-- Pending Reply Message -->
+      <div *ngIf="!msg.reply" class="text-warning fst-italic mb-2">
+        ⏳ Awaiting admin reply...
+      </div>
+
+      <!-- Status + Action -->
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <span class="badge px-3 py-1"
+              [ngClass]="msg.reply ? 'bg-success' : 'bg-warning text-dark'">
+          {{ msg.reply ? 'Replied' : 'Pending' }}
+        </span>
+
+        <button class="btn btn-sm btn-outline-danger"
+                (click)="confirmDelete(msg.id)">
+          <i class="bi bi-trash"></i> Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

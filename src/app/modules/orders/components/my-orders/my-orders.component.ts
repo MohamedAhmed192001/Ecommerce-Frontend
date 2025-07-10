@@ -3,6 +3,7 @@ import { OrderResponse } from '../../../../shared/models/ResponseDTOs/order-resp
 import { OrderService } from '../../../../core/services/order/order.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { MyOrder } from '../../../../shared/models/ResponseDTOs/my-order';
 
 
 
@@ -14,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './my-orders.component.css'
 })
 export class MyOrdersComponent {
-  orders: OrderResponse[] = [];
+  myOrders: MyOrder[] = [];
 
   constructor(private orderService: OrderService, private route: Router,
     private toastr: ToastrService) { }
@@ -25,7 +26,11 @@ export class MyOrdersComponent {
   }
 
   loadOrders(): void {
-
+    const userId = this.orderService.getUserIdFromToken();
+    this.orderService.getUserOrders(userId).subscribe({
+      next: myOrders => { this.myOrders = myOrders },
+      error: err => { this.toastr.error('Error when feching my orders') }
+    })
   }
 
 }

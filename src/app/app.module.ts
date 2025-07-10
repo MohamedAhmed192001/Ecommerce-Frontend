@@ -15,6 +15,10 @@ import { HomeModule } from './modules/home/home.module';
 import { PaymentModule } from './modules/payment/payment.module';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ContactMessageComponent } from './shared/components/navbar/contact-message/contact-message.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AboutUsComponent } from './shared/components/navbar/about-us/about-us.component';
+import { MyMessagesComponent } from './shared/components/navbar/contact-message/my-messages/my-messages.component';
 
 
 
@@ -23,6 +27,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppComponent,
     NavbarComponent,
     FooterComponent,
+    ContactMessageComponent,
+    AboutUsComponent,
+    MyMessagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +40,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeModule,
     PaymentModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot(
       {
         timeOut: 3000,
