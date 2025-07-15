@@ -16,6 +16,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './checkout.component.css'
 })
 export class CheckoutComponent {
+  governorates: string[] = [
+    'Cairo', 'Giza', 'Alexandria', 'Dakahlia', 'Asyut', 'Qalyubia', 'Sharqia', 'Suez', 'Luxor', 'Minya'
+  ];
   stripePromise = loadStripe('pk_test_51R8s7aPF72k9SIzNGW69CKosJGw2maFX4hDZeN7D7e1CQhotIds9qsCBi8jKrMMUvBGLwpcXsSJVYt28t5e5CMDz00AFWNA4Qe');
   checkoutForm: FormGroup;
   cartItems;
@@ -23,8 +26,11 @@ export class CheckoutComponent {
     private fb: FormBuilder, private router: Router, private toastr: ToastrService) {
     this.cartItems = this.cartService.getCart();
     this.checkoutForm = fb.group({
-      phone: ['', Validators.required],
-      address: ['', Validators.required],
+      street: ['', Validators.required],
+      city: ['', Validators.required],
+      region: ['', Validators.required],
+      postalCode: ['', [Validators.required, Validators.pattern(/^\d{5}$/)]],
+      phone: ['', [Validators.required, Validators.pattern(/^01[0-2,5][0-9]{8}$/)]],
     })
 
   }
@@ -48,10 +54,12 @@ export class CheckoutComponent {
     if (!this.checkoutForm.valid || this.cartItems.length == 0)
       this.toastr.error('Please fill all fields and ensure the cart is not empty');
 
+    const fullAddress = `${this.checkoutForm.value.street}, ${this.checkoutForm.value.city}, ${this.checkoutForm.value.region}, ${this.checkoutForm.value.postalCode}`;
+
     const order: Order = {
       userId: this.getUserIdFromToken(),
       phone: this.checkoutForm.value.phone,
-      address: this.checkoutForm.value.address,
+      address: fullAddress,
       items: this.cartItems.map(item => ({
         ProductId: item.product.id,
         productName: item.product.name,

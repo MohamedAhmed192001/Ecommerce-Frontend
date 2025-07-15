@@ -16,7 +16,7 @@ import { MyOrder } from '../../../../shared/models/ResponseDTOs/my-order';
 })
 export class MyOrdersComponent {
   myOrders: MyOrder[] = [];
-
+  counter = 0;
   constructor(private orderService: OrderService, private route: Router,
     private toastr: ToastrService) { }
 

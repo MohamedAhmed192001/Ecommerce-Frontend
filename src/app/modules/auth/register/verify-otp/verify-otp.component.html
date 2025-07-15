@@ -1,0 +1,40 @@
+<div class="container my-5">
+  <div class="card p-4 shadow-sm mx-auto border-start border-4 border-primary rounded-4" style="max-width: 500px;">
+
+    <!-- Header -->
+    <h5 class="mb-4 text-primary fw-semibold text-center">
+      🔐 Enter the 6-digit code sent to <span class="text-dark">{{ email }}</span>
+    </h5>
+
+    <!-- OTP Form -->
+    <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
+
+      <!-- Code Input -->
+      <div class="mb-4">
+        <label for="otp" class="form-label visually-hidden">OTP Code</label>
+        <input type="text"
+               id="otp"
+               class="form-control text-center fs-4 fw-bold tracking-widest letter-spacing-lg"
+               maxlength="6"
+               formControlName="code"
+               placeholder="______"
+               inputmode="numeric"
+               autocomplete="one-time-code"
+               [ngClass]="{ 'is-invalid': otpForm.get('code')?.invalid && otpForm.get('code')?.touched }" />
+
+        <!-- Error Message -->
+        <div class="invalid-feedback text-center">
+          Please enter a valid 6-digit code.
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit"
+              class="btn btn-success w-100 rounded-pill py-2 fs-6"
+              [disabled]="otpForm.invalid">
+        ✅ Verify & Register
+      </button>
+
+    </form>
+  </div>
+</div>

@@ -3,13 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ConfirmEmailComponent } from './register/confirm-email/confirm-email.component';
+import { VerifyOtpComponent } from './register/verify-otp/verify-otp.component';
 
 const routes: Routes =
   [
     { path: '', component: LoginComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'email-confirmed', component: ConfirmEmailComponent },
+    { path: 'verify-otp', component: VerifyOtpComponent },
   ];
 
 @NgModule({

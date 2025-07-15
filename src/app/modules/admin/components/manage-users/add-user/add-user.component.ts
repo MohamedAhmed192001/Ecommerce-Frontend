@@ -6,14 +6,6 @@ import { UserCreate } from '../../../../../shared/models/CreateDTOs/user-create'
 import { ToastrService } from 'ngx-toastr';
 
 
-//FirstName: string,
-//  LastName: string,
-//    address: string,
-//      email: string,
-//        role: string,
-//          password: string,
-
-
 @Component({
   selector: 'app-add-user',
   standalone: false,
@@ -46,7 +38,6 @@ export class AddUserComponent {
         lastName: this.userForm.value.lastName,
         address: this.userForm.value.address,
         email: this.userForm.value.email,
-        role: this.userForm.value.role,
         password: this.userForm.value.password,
       }
 

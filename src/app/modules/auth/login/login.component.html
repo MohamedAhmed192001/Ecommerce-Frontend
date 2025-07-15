@@ -1,58 +1,72 @@
-<div class="container my-5" style="max-width: 420px;">
-  <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-light px-3 px-md-5">
+  <div class="row w-100 shadow-lg rounded-4 overflow-hidden bg-white" style="max-width: 960px;">
 
-    <h3 class="text-center mb-4 fw-semibold text-primary">🔐 Login to Smart Supply</h3>
+    <!-- Left Half: Login Form -->
+    <div class="col-md-6 p-5">
+      <h3 class="text-center mb-4 fw-bold text-primary">Login to Smart Supply</h3>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-      <!-- Email -->
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-          <input type="email"
-                 id="email"
-                 class="form-control"
-                 placeholder="example@gmail.com"
-                 formControlName="email"
-                 [ngClass]="{ 'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched }" />
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+            <input type="email"
+                   id="email"
+                   class="form-control"
+                   placeholder="example@gmail.com"
+                   formControlName="email"
+                   [ngClass]="{ 'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched }" />
+          </div>
+          <div class="invalid-feedback" *ngIf="loginForm.get('email')?.errors?.['required']">
+            Email is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="loginForm.get('email')?.errors?.['email']">
+            Invalid email format.
+          </div>
         </div>
-        <div class="invalid-feedback" *ngIf="loginForm.get('email')?.errors?.['required']">
-          Email is required.
+
+        <!-- Password -->
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+            <input type="password"
+                   id="password"
+                   class="form-control"
+                   placeholder="••••••••"
+                   formControlName="password"
+                   [ngClass]="{ 'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched }" />
+          </div>
+          <div class="invalid-feedback" *ngIf="loginForm.get('password')?.errors?.['required']">
+            Password is required.
+          </div>
         </div>
-        <div class="invalid-feedback" *ngIf="loginForm.get('email')?.errors?.['email']">
-          Invalid email format.
-        </div>
+
+        <!-- Submit Button -->
+        <button type="submit"
+                class="btn btn-primary w-100 mt-3 rounded-pill"
+                [disabled]="loginForm.invalid">
+          Login
+        </button>
+      </form>
+
+      <!-- Register Link -->
+      <div class="text-center mt-3">
+        <a routerLink="/register" class="small text-decoration-none">Don’t have an account? Register</a>
       </div>
-
-      <!-- Password -->
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-lock"></i></span>
-          <input type="password"
-                 id="password"
-                 class="form-control"
-                 placeholder="••••••••"
-                 formControlName="password"
-                 [ngClass]="{ 'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched }" />
-        </div>
-        <div class="invalid-feedback" *ngIf="loginForm.get('password')?.errors?.['required']">
-          Password is required.
-        </div>
-      </div>
-
-      <!-- Submit -->
-      <button type="submit"
-              class="btn btn-primary w-100 mt-3 rounded-pill"
-              [disabled]="loginForm.invalid">
-        Login
-      </button>
-    </form>
-
-    <!-- Optional: Add helper links -->
-    <div class="text-center mt-3">
-      <a routerLink="/register" class="small text-decoration-none">Don’t have an account? Register</a>
     </div>
+
+    <!-- Right Half: Info Panel -->
+    <div class="col-md-6 d-none d-md-flex flex-column justify-content-center align-items-center text-white bg-primary p-5 text-center">
+      <h4 class="fw-bold mb-3">Welcome to Smart Supply</h4>
+      <p class="mb-4">
+        Your direct connection to the factory.<br />
+        Place orders, manage products, and streamline your supermarket supply.
+      </p>
+      <img src="assets/images/login-illustration.svg" alt="Smart Supply" class="img-fluid" style="max-height: 200px;" />
+    </div>
+
   </div>
 </div>

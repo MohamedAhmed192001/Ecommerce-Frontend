@@ -1,95 +1,99 @@
-<div class="container my-5" style="max-width: 500px;">
-  <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-light px-3 px-md-5">
+  <div class="row w-100 shadow-lg rounded-4 overflow-hidden bg-white" style="max-width: 960px;">
 
-    <!-- Title -->
-    <h3 class="text-center fw-semibold text-primary mb-4">📝 Create Your Account</h3>
+    <!-- Left Side: Registration Form -->
+    <div class="col-md-6 p-5" *ngIf="!otpSent">
+      <h3 class="text-center text-primary mb-4 fw-bold">Create Your Smart Supply Account</h3>
 
-    <!-- Registration Form -->
-    <form *ngIf="!registerSubmited" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-
-      <!-- First Name -->
-      <div class="mb-3">
-        <label for="firstName" class="form-label">First Name</label>
-        <input type="text"
-               id="firstName"
-               class="form-control"
-               placeholder="John"
-               formControlName="firstName"
-               [ngClass]="{ 'is-invalid': registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched }" />
-        <div class="invalid-feedback">First name is required.</div>
-      </div>
-
-      <!-- Last Name -->
-      <div class="mb-3">
-        <label for="lastName" class="form-label">Last Name</label>
-        <input type="text"
-               id="lastName"
-               class="form-control"
-               placeholder="Doe"
-               formControlName="lastName"
-               [ngClass]="{ 'is-invalid': registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched }" />
-        <div class="invalid-feedback">Last name is required.</div>
-      </div>
-
-      <!-- Email -->
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email"
-               id="email"
-               class="form-control"
-               placeholder="example@gmail.com"
-               formControlName="email"
-               [ngClass]="{ 'is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched }" />
-        <div class="invalid-feedback">
-          {{ registerForm.get('email')?.errors?.['required'] ? 'Email is required.' : 'Enter a valid email.' }}
+      <form [formGroup]="registerForm" (ngSubmit)="sendOtp()">
+        <!-- First Name -->
+        <div class="mb-3">
+          <label class="form-label">First Name</label>
+          <input type="text"
+                 class="form-control"
+                 formControlName="firstName"
+                 placeholder="e.g. Mohamed"
+                 [ngClass]="{ 'is-invalid': registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched }" />
+          <div class="invalid-feedback">First name is required.</div>
         </div>
+
+        <!-- Last Name -->
+        <div class="mb-3">
+          <label class="form-label">Last Name</label>
+          <input type="text"
+                 class="form-control"
+                 formControlName="lastName"
+                 placeholder="e.g. Ahmed"
+                 [ngClass]="{ 'is-invalid': registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched }" />
+          <div class="invalid-feedback">Last name is required.</div>
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email"
+                 class="form-control"
+                 formControlName="email"
+                 placeholder="e.g. mohamed123@gmail.com"
+                 [ngClass]="{ 'is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched }" />
+          <div class="invalid-feedback">Valid email is required.</div>
+          <small class="text-muted">We'll send a verification code to this email.</small>
+        </div>
+
+        <!-- Address -->
+        <div class="mb-3">
+          <label class="form-label">Store Address</label>
+          <input type="text"
+                 class="form-control"
+                 formControlName="address"
+                 placeholder="e.g. 25 Market St, Giza"
+                 [ngClass]="{ 'is-invalid': registerForm.get('address')?.invalid && registerForm.get('address')?.touched }" />
+          <div class="invalid-feedback">Address is required.</div>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-4">
+          <label class="form-label">Password</label>
+          <input type="password"
+                 class="form-control"
+                 formControlName="password"
+                 placeholder="Enter a strong password"
+                 [ngClass]="{ 'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched }" />
+          <div class="invalid-feedback">Password must be at least 6 characters.</div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit"
+                class="btn btn-primary w-100 rounded-pill"
+                [disabled]="registerForm.invalid">
+          📲 Send Verification Code
+        </button>
+      </form>
+
+      <!-- Link to Login -->
+      <div class="text-center mt-3">
+        <a routerLink="/login" class="small text-decoration-none">Already have an account? Login</a>
       </div>
+    </div>
 
-      <!-- Address -->
-      <div class="mb-3">
-        <label for="address" class="form-label">Address</label>
-        <input type="text"
-               id="address"
-               class="form-control"
-               placeholder="Store Location"
-               formControlName="address"
-               [ngClass]="{ 'is-invalid': registerForm.get('address')?.invalid && registerForm.get('address')?.touched }" />
-        <div class="invalid-feedback">Address is required.</div>
-      </div>
+    <!-- Right Side: Info Panel -->
+    <div class="col-md-6 d-none d-md-flex flex-column justify-content-center align-items-center text-white bg-primary p-5 text-center">
+      <h4 class="fw-bold mb-3">Welcome to Smart Supply</h4>
+      <p class="mb-4">
+        Streamline orders from supermarkets to factories.<br />
+        Get verified and start placing your orders today.
+      </p>
+      <img src="assets/images/register-info.svg"
+           alt="Register Illustration"
+           class="img-fluid"
+           style="max-height: 200px;" />
+    </div>
 
-      <!-- Role -->
-      <div class="mb-3">
-        <label for="role" class="form-label">Role</label>
-        <select id="role"
-                class="form-select"
-                formControlName="role"
-                [ngClass]="{ 'is-invalid': registerForm.get('role')?.invalid && registerForm.get('role')?.touched }">
-          <option value="" disabled selected>Select role</option>
-          <option value="Admin">Admin</option>
-          <option value="Customer">Customer</option>
-        </select>
-        <div class="invalid-feedback">Role is required.</div>
-      </div>
-
-      <!-- Password -->
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password"
-               id="password"
-               class="form-control"
-               placeholder="••••••••"
-               formControlName="password"
-               [ngClass]="{ 'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched }" />
-        <div class="invalid-feedback">Password is required.</div>
-      </div>
-
-      <!-- Submit -->
-      <button type="submit"
-              class="btn btn-success w-100 rounded-pill mt-2"
-              [disabled]="registerForm.invalid">
-        Register
-      </button>
-
-    </form>
+    <!-- OTP Verification Section -->
+    <app-verify-otp *ngIf="otpSent"
+                    [email]="emailForOtp"
+                    [pendingUserData]="pendingUserData"
+                    class="p-4">
+    </app-verify-otp>
   </div>
 </div>

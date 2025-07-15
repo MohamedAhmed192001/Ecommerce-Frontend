@@ -7,13 +7,15 @@ import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfirmEmailComponent } from './register/confirm-email/confirm-email.component';
+import { VerifyOtpComponent } from './register/verify-otp/verify-otp.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
-    ConfirmEmailComponent
+    ConfirmEmailComponent,
+    VerifyOtpComponent
   ],
   exports: [
     LoginComponent,

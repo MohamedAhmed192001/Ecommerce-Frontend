@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { OtpService } from '../../../core/services/OTP/otp.service';
 
 @Component({
   selector: 'app-register',
@@ -14,31 +15,34 @@ export class RegisterComponent {
   registerForm: FormGroup;
   registerSubmited = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService,
+  otpSent = false;
+  emailForOtp!: string;
+  pendingUserData!: string;
+
+  constructor(private fb: FormBuilder, private authService: AuthService, private otpService: OtpService,
     private router: Router, private toastr: ToastrService) {
     this.registerForm = fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      address: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      address: ['', Validators.required],
       password: ['', Validators.required],
-      role: ['', Validators.required]
     })
   }
 
 
-  onSubmit() {
+  sendOtp() {
     if (this.registerForm.valid) {
-      this.authService.register(this.registerForm.value).subscribe({
-        next: () =>
-        {
-          this.toastr.success('Registered successfully! Please confirm your email before login');
-          this.registerSubmited = true;
-          setTimeout(() => { this.router.navigate(['/login']) }, 3000);
+      const email = this.registerForm.get('email')?.value?.toString();
+
+      this.otpService.sendOtp(email).subscribe({
+        next: () => {
+          this.otpSent = true;
+          this.emailForOtp = email;
+          this.pendingUserData = this.registerForm.value;
         },
         error: () => {
-          this.toastr.error('Registration failed. Try a different email');
-
+          this.toastr.error("Error when sending OTP");
         }
       })
     }

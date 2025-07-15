@@ -1,26 +1,25 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
   <div class="container-fluid">
-    <!-- Brand -->
-    <a class="navbar-brand fw-bold" routerLink="/home">Smart Supply</a>
+    <!-- Logo / Brand -->
+    <a class="navbar-brand fw-bold" routerLink="/home">
+      Smart Supply
+    </a>
 
-    <!-- Toggler for mobile -->
+    <!-- Toggler for Mobile -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#smartNavbar"
             aria-controls="smartNavbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Collapsible Content -->
+    <!-- Main Navigation -->
     <div class="collapse navbar-collapse" id="smartNavbar">
-
-      <!-- Left: Navigation Links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-        <!-- Public -->
+        <!-- Public Links -->
         <li class="nav-item">
           <a class="nav-link" routerLink="/about">About Us</a>
         </li>
 
-        <!-- Normal User (Authenticated, not Admin) -->
+        <!-- Normal Customer -->
         <ng-container *ngIf="isAuthenticated && !isAdmin">
           <li class="nav-item">
             <a class="nav-link" routerLink="/products">Products</a>
@@ -33,19 +32,18 @@
           </li>
         </ng-container>
 
-        <!-- Admin -->
+        <!-- Admin Panel -->
         <li class="nav-item" *ngIf="isAdmin">
           <a class="nav-link" routerLink="/admin">Admin Panel</a>
         </li>
       </ul>
 
-      <!-- Right: Auth, Cart, Profile -->
-      <ul class="navbar-nav mb-2 mb-lg-0 d-flex align-items-center gap-2">
-
-        <!-- Cart (Only for authenticated users, not admin) -->
+      <!-- Right Side (Auth & Cart) -->
+      <ul class="navbar-nav d-flex align-items-center gap-2">
+        <!-- Cart Icon -->
         <li class="nav-item position-relative" *ngIf="isAuthenticated && !isAdmin">
-          <a class="nav-link d-flex align-items-center gap-1" routerLink="/cart">
-            <i class="bi bi-cart"></i> Cart
+          <a class="nav-link d-flex align-items-center" routerLink="/cart">
+            <i class="bi bi-cart4 me-1"></i> Cart
             <span *ngIf="cartCount > 0"
                   class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle">
               {{ cartCount }}
@@ -53,38 +51,33 @@
           </a>
         </li>
 
-        <!-- Guest: Login / Register -->
+        <!-- Guest: Login/Register -->
         <ng-container *ngIf="!isAuthenticated">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/login">Login</a>
+            <a class="btn btn-outline-light btn-sm" routerLink="/login">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/register">Register</a>
+            <a class="btn btn-outline-primary btn-sm" routerLink="/register">Register</a>
           </li>
         </ng-container>
 
-        <!-- Authenticated: Dropdown Menu -->
+        <!-- Authenticated User Dropdown -->
         <li class="nav-item dropdown" *ngIf="isAuthenticated">
-          <a class="nav-link dropdown-toggle"
-             href="#"
-             role="button"
-             data-bs-toggle="dropdown"
-             aria-expanded="false"
-             id="userDropdown">
-            👤 {{ userName }}
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown"
+             role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ userName }}
           </a>
           <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userDropdown">
             <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
-            <li *ngIf="!isAdmin">
-              <a class="dropdown-item" routerLink="/my-messages">🗨️ My Messages</a>
-            </li>
+            <li *ngIf="!isAdmin"><a class="dropdown-item" routerLink="/my-messages">🗨️ My Messages</a></li>
             <li><hr class="dropdown-divider" /></li>
             <li>
-              <a class="dropdown-item text-danger" (click)="logout()">Logout</a>
+              <button class="dropdown-item text-danger" (click)="logout()">
+                Logout
+              </button>
             </li>
           </ul>
         </li>
-
       </ul>
     </div>
   </div>
